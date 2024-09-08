@@ -48,26 +48,28 @@ module.exports={
     post:(req,res)=>
     {
         const body= req.body;
-        postArreglo(body, (error, results) => {
-            if(error){
-                console.log(error);
-                return res.status(500).json({
-                    success:0,
-                    message:"Error de conexión a base de datos."
-                });
-            }
+        if (body.nombre&&body.precio&&body.descripcion&&body.tipoArreglo&&body.activo) {
+            postArreglo(body, (error, results) => {
+                if(error){
+                    console.log(error);
+                    return res.status(500).json({
+                        success:0,
+                        message:"Error de conexión a base de datos."
+                    });
+                }
 
-            if(results.length===0){
+                if(results.length===0){
+                    return res.status(200).json({
+                        success: 1,
+                        message: "No se pudo insertar el arreglo.;"
+                    });
+                }
                 return res.status(200).json({
                     success: 1,
-                    message: "No se pudo insertar el arreglo.;"
+                    message:"Arreglo insertado exitosamente.",
+                    data: results
                 });
-            }
-            return res.status(200).json({
-                success: 1,
-                message:"Arreglo agregado exitosamente.",
-                data: results
             });
-        });        
+        }
     }
 };
