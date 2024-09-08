@@ -29,21 +29,21 @@ module.exports={
             });
         }else{
             
-        const body= req.body;
-        getAllArreglos(body,(error,results)=>{
-            if(error){
-                console.log(error);
-                return res.status(500).json({
-                    success:0,
-                    message:"Error de conexión a base de datos."
+            const body= req.body;
+            getAllArreglos(body,(error,results)=>{
+                if(error){
+                    console.log(error);
+                    return res.status(500).json({
+                        success:0,
+                        message:"Error de conexión a base de datos."
+                    });
+                }
+                return res.status(200).json({
+                    success:1,
+                    data:results
                 });
-            }
-            return res.status(200).json({
-                success:1,
-                data:results
             });
-        });
-    }
+        }
     },
     post:(req,res)=>
     {
@@ -68,6 +68,6 @@ module.exports={
                     data: results
                 });
             });
+        }
     }
-}
 };
