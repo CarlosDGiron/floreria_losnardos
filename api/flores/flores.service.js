@@ -7,7 +7,7 @@ module.exports = {
             if(error){
                 return callBack(error);                
             }
-            console.log("Solicitud realizada a API \"flores:getAllArreglos\" realizada exitosamente.")
+            console.log("Solicitud realizada a API \"flores:getAllArreglos\" realizada exitosamente.");
             return callBack(null, results);
         });
     },
@@ -20,27 +20,25 @@ module.exports = {
                 if (error) {
                     return callBack(error);                
                 }                
-                console.log("Solicitud realizada a API \"flores:getByTipoArreglo\" realizada exitosamente.")
+                console.log("Solicitud realizada a API \"flores:getByTipoArreglo\" realizada exitosamente.");
                 return callBack(null, results);
             }
         );
     },
 
     postArreglo: (data,callBack) => {
-        pool.query(`INSERT INTO ArregloFloral (nombre,precio, descripcion,tipoArreglo,activo) VALUES ?,?,?,?,?;`,
-
-            [   data.query.nombre,
-                data.query.precio,
-                data.query.descripcion,
-                data.query.tipoArreglo,
-                data.query.activo
+        pool.query(`INSERT INTO ArregloFloral (nombre, precio, descripcion, tipoArreglo, activo) VALUES (?,?,?,?,?)`,
+            [   data.nombre,
+                data.precio,
+                data.descripcion,
+                data.tipoArreglo,
+                data.activo
             ],
-
         (error, results,fields)=>{
             if(error){
                 return callBack(error);                
             }
-            console.log("Solicitud realizada a API \"flores:postArreglo\"  realizada exitosamente.")
+            console.log("Solicitud realizada a API \"flores:postArreglo\"  realizada exitosamente.");
             return callBack(null, results);
         });
     },
